@@ -50,7 +50,7 @@ namespace BarmejBelLebnene
             string[] programStatements = s.Split("\n\t");
             for (int i = 0; i < programStatements.Length; i++)
             {
-                if (programStatements[i].StartsWith("min"))
+                if (Regex.IsMatch(programStatements[i].Trim() ,RegexPatterns.ForStatementPattern))
                 {
                     StringBuilder fs = new StringBuilder();
                     fs.Append(programStatements[i] + "\n");
@@ -81,6 +81,18 @@ namespace BarmejBelLebnene
                 return variables[variableName.Trim()];
             }
             return $"#{variableName.Trim()}";
+        }
+
+        public static string generateRandomCode()
+        {
+            string[] randomCode = new string[]
+            {
+                "#tejhiz\r\n\tra2m i =0\r\n\tra2m j=0\r\n#barmajeh\r\n\tmin i la 10:\r\n\t\tzid i 3a j",
+                "#tejhiz\r\n\tra2m i =0\r\n\tra2m j=0\r\n\tra2m z=0\r\n#barmajeh\r\n\tmin i la 10:\r\n\t\tzid i 3a j\r\n\t\tzid i,j 3a z"
+
+            };
+            Random random = new Random();
+            return randomCode[random.Next(randomCode.Length)];
         }
     }
 }

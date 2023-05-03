@@ -21,6 +21,7 @@ namespace BarmejBelLebnene.Functionality
             return varAdditionExps.ToString();
 
         }
+
         public static string varSubtractionOnInitial(String expression)
         {
             string target = BBL.getVariableValue(expression.Split("mn")[1].Trim());

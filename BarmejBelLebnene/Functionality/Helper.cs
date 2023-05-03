@@ -11,6 +11,7 @@ namespace BarmejBelLebnene.Functionality
     {
         public static void removeExtraSpace(ref String s)
         {
+ 
             s = Regex.Replace(s, @"\s+", " ");
         }
 

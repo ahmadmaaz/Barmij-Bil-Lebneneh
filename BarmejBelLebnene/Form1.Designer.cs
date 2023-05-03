@@ -50,6 +50,7 @@
             // compileBtn
             // 
             compileBtn.BackColor = SystemColors.HotTrack;
+            compileBtn.Cursor = Cursors.Hand;
             compileBtn.FlatStyle = FlatStyle.Popup;
             compileBtn.ForeColor = SystemColors.Window;
             compileBtn.Location = new Point(820, 448);
@@ -67,6 +68,7 @@
             // generateSampleBtn
             // 
             generateSampleBtn.BackColor = SystemColors.HotTrack;
+            generateSampleBtn.Cursor = Cursors.Hand;
             generateSampleBtn.DialogResult = DialogResult.OK;
             generateSampleBtn.FlatStyle = FlatStyle.Popup;
             generateSampleBtn.ForeColor = SystemColors.Window;
@@ -80,13 +82,14 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = SystemColors.Window;
-            pictureBox1.Cursor = Cursors.Cross;
+            pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(856, 1);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(51, 42);
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // Form1
             // 

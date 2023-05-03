@@ -1,4 +1,5 @@
 using BarmejBelLebnene.Exceptions;
+using System.Security.Policy;
 
 namespace BarmejBelLebnene
 {
@@ -10,12 +11,10 @@ namespace BarmejBelLebnene
         }
 
 
-
         private void compileBtn_Click(object sender, EventArgs e)
         {
             try
             {
-
                 BBL bbl = new BBL(bblCode.Text);
                 saveFileDialog1.DefaultExt = ".s";
                 saveFileDialog1.FileName = "file.s";
@@ -45,6 +44,11 @@ namespace BarmejBelLebnene
             {
                 MessageBox.Show("We dont know what happened either " + err, "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/ahmadmaaz");
         }
     }
 }
