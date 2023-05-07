@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
+
 namespace BarmejBelLebnene.Functionality
 {
-    internal class ForLoop
+    internal class ForLoop : ControlFlow
     {
-        private readonly Dictionary<string, string> variables;
-        public ForLoop(Dictionary<string, string> variables)
+
+        public ForLoop(string s)
         {
-            //Set the variable dictionary
-            this.variables = variables;
+            compute(s);
         }
 
-        public string computeFor(string s)
+        protected override void compute(string s)
         {
             string[] fs = s.Split("\n"); // Get the loop expression
 
@@ -26,16 +26,17 @@ namespace BarmejBelLebnene.Functionality
             string startVar = BBL.getVariableValue(forParam[1]);
             string toVal = BBL.getVariableValue(forParam[3].Split(':')[0]);
             string[] minList = s.Split(new string[] { "min" }, StringSplitOptions.None);
-            if (minList.Length - 1 >1)  
+            if (minList.Length - 1 > 1)  //Handle Nested Loops 
             {
                 string incrementExpression = $"add {startVar},{startVar},#1\n";
                 string[] forParamSecond = fs[1].Split(" ");
                 string startVarSecond = BBL.getVariableValue(forParamSecond[1]);
 
                 string firstLoop = $"for0: cmp {startVar},{toVal}\nbgt end\n{incrementExpression}mov {startVarSecond},#0\nb for1\n";
-                string[] tempFs = s.Split("\r");
+                string[] tempFs = s.Split("\n");
                 tempFs[0] = "";
-                return firstLoop + computeNestedForLoop(string.Join(" ", tempFs).Trim(), 1) + "\nend:";
+                sb.Append(firstLoop + computeNestedForLoop(string.Join("\n", tempFs).Trim(), 1) + "\nend:");
+                return;
             }
 
 
@@ -50,29 +51,28 @@ namespace BarmejBelLebnene.Functionality
                 {
                     continue;
                 }
-                assemblyExp.AppendLine(computeExpression(expression.Trim()));
+                assemblyExp.AppendLine(Helper.computeExpression(expression.Trim()));
             }
 
-
-            return generateForLoop(startVar, toVal, assemblyExp.ToString()); ;
-
+            sb.Append(generateForLoop(startVar, toVal, assemblyExp.ToString()));
         }
 
 
-        private string computeNestedForLoop(string s,int forLoopNmb)
+        private string computeNestedForLoop(string s, int forLoopNmb)
         {
             string[] fs = s.Split("\n"); // Get the loop expression
+            if (!Regex.IsMatch(fs[0].Trim(), RegexPatterns.ForStatementPattern)) throw new InvalidForLoopDefinitionException(fs[0]);
             string[] minList = s.Split(new string[] { "min" }, StringSplitOptions.None);
             string[] forParam = fs[0].Split(" ");
             string startVar = BBL.getVariableValue(forParam[1]);
             string toVal = BBL.getVariableValue(forParam[3].Split(':')[0]);
-            if (minList.Length - 1 > 1)  // Only 2 nested loops 
+            if (minList.Length - 1 > 1)
             {
-              
+
                 string[] tempFs = s.Split("\n");
                 tempFs[0] = "";
 
-                return generateNestedForLoop(startVar, toVal, "", forLoopNmb) +"\n"+ computeNestedForLoop(string.Join(" ",tempFs).Trim(),forLoopNmb+1);
+                return generateNestedForLoop(startVar, toVal, "", forLoopNmb) + "\n" + computeNestedForLoop(string.Join("\n", tempFs).Trim(), forLoopNmb + 1);
             }
 
             StringBuilder assemblyExp = new StringBuilder();
@@ -80,17 +80,17 @@ namespace BarmejBelLebnene.Functionality
 
             for (int i = 0; i < insideExp.Length; i++)
             {
-                
+
                 Helper.removeExtraSpace(ref insideExp[i]);
                 string expression = insideExp[i].Trim();
                 if (string.IsNullOrEmpty(expression)) //To skip empty lines
                 {
                     continue;
                 }
-                assemblyExp.AppendLine(computeExpression(expression.Trim()));
+                assemblyExp.AppendLine(Helper.computeExpression(expression.Trim()));
             }
 
-            return generateNestedForLoop(startVar, toVal, assemblyExp.ToString(),forLoopNmb); ;
+            return generateNestedForLoop(startVar, toVal, assemblyExp.ToString(), forLoopNmb); ;
 
         }
 
@@ -121,12 +121,17 @@ namespace BarmejBelLebnene.Functionality
             return $"for: cmp {startVar},{toVal}\nbgt end\n{assemblyExp}{incrementExpression}b for\nend:";
         }
 
-        private string generateNestedForLoop(string startVar, string toVal, string assemblyExp,int nmb)
+        private string generateNestedForLoop(string startVar, string toVal, string assemblyExp, int nmb)
         {
             string incrementExpression = $"add {startVar},{startVar},#1\n";
-            return $"for{nmb}: cmp {startVar},{toVal}\nbgt for{nmb-1}\n{assemblyExp}{incrementExpression}b for{nmb}\n";
+            return $"for{nmb}: cmp {startVar},{toVal}\nbgt for{nmb - 1}\n{assemblyExp}{incrementExpression}b for{nmb}\n";
         }
-        
+
+
+        public override string ToString()
+        {
+            return sb.ToString();
+        }
 
     }
 }

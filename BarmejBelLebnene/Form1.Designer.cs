@@ -34,6 +34,7 @@
             saveFileDialog1 = new SaveFileDialog();
             generateSampleBtn = new Button();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -78,6 +79,7 @@
             generateSampleBtn.TabIndex = 2;
             generateSampleBtn.Text = "Sample Code";
             generateSampleBtn.UseVisualStyleBackColor = false;
+            generateSampleBtn.Click += generateSampleBtn_Click_1;
             // 
             // pictureBox1
             // 
@@ -91,20 +93,32 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Britannic Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(12, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(205, 23);
+            label1.TabIndex = 4;
+            label1.Text = "Barmej Bel Lebneneh";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(907, 483);
+            Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(generateSampleBtn);
             Controls.Add(compileBtn);
             Controls.Add(bblCode);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "BBL";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -117,5 +131,6 @@
         private SaveFileDialog saveFileDialog1;
         private Button generateSampleBtn;
         private PictureBox pictureBox1;
+        private Label label1;
     }
 }

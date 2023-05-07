@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ProgrammingProjects\\Desktop\\BarmejBelLebnene\\BarmejBelLebnene\\BarmejBelLebnene.csproj": {}
+    "C:\\ProgrammingProjects\\Desktop\\BBL\\BarmejBelLebnene\\BarmejBelLebnene.csproj": {}
   },
   "projects": {
-    "C:\\ProgrammingProjects\\Desktop\\BarmejBelLebnene\\BarmejBelLebnene\\BarmejBelLebnene.csproj": {
+    "C:\\ProgrammingProjects\\Desktop\\BBL\\BarmejBelLebnene\\BarmejBelLebnene.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProgrammingProjects\\Desktop\\BarmejBelLebnene\\BarmejBelLebnene\\BarmejBelLebnene.csproj",
+        "projectUniqueName": "C:\\ProgrammingProjects\\Desktop\\BBL\\BarmejBelLebnene\\BarmejBelLebnene.csproj",
         "projectName": "BarmejBelLebnene",
-        "projectPath": "C:\\ProgrammingProjects\\Desktop\\BarmejBelLebnene\\BarmejBelLebnene\\BarmejBelLebnene.csproj",
+        "projectPath": "C:\\ProgrammingProjects\\Desktop\\BBL\\BarmejBelLebnene\\BarmejBelLebnene.csproj",
         "packagesPath": "C:\\Users\\ahmad\\.nuget\\packages\\",
-        "outputPath": "C:\\ProgrammingProjects\\Desktop\\BarmejBelLebnene\\BarmejBelLebnene\\obj\\",
+        "outputPath": "C:\\ProgrammingProjects\\Desktop\\BBL\\BarmejBelLebnene\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmad\\AppData\\Roaming\\NuGet\\NuGet.Config",
