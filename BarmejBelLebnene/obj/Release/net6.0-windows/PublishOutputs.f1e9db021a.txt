@@ -1,0 +1,5 @@
+D:\BarmejBelLebnene.exe
+D:\BarmejBelLebnene.dll
+D:\BarmejBelLebnene.deps.json
+D:\BarmejBelLebnene.runtimeconfig.json
+D:\BarmejBelLebnene.pdb

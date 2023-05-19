@@ -35,7 +35,6 @@ namespace BarmejBelLebnene
                 throw new FunctionNotFound(tejhizFound ? "#barmajeh" : "#tejhiz");
             }
 
-
             setup(s.Split("#tejhiz")[1].Split("#")[0].Trim());
             program(s.Split("#barmajeh")[1]);
 
@@ -81,23 +80,33 @@ namespace BarmejBelLebnene
             string[] programStatements = s.Split("\n\t"); // Split the Statements by "\n" 
             for (int i = 0; i < programStatements.Length; i++)
             {
+                if (String.IsNullOrEmpty(programStatements[i].Trim())) continue;
                 if (programStatements[i].Trim().StartsWith("min")) // detect if its a loop expression
                 {
                     //If its a for loop, we get all expressions after this for loop and add them to a string builder so we can convert the for loop 
+                    
                     StringBuilder fs = new StringBuilder();
                     fs.Append(programStatements[i] + "\n");
+                    int incrementi = 0;
                     for (int j = i + 1; j < programStatements.Length; j++)
                     {
-                        if (programStatements[j].StartsWith("\t"))
+                        if (programStatements[j].StartsWith("\t\t"))
                         {
                             fs.Append(programStatements[j] + "\n");
-                            i++;
+                            incrementi++;
                             continue;
                         }
                         break;
                     }
+                    i += incrementi;
                     ForLoop forLoop = new ForLoop(fs.ToString());
                     sb.AppendLine(forLoop.ToString());
+                }
+                else
+                {
+                    Console.WriteLine(programStatements[i].Trim());
+                    sb.AppendLine(Helper.computeExpression(programStatements[i].Trim()));
+
                 }
 
 
